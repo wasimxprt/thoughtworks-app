@@ -1,7 +1,16 @@
 /* Style the body */
-* {
-	box-sizing: border-box;
-}
+
+*,
+*::before,
+*::after{box-sizing:border-box;}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,  figure, figcaption, footer, header, hgroup,  menu, nav, output, ruby, section, summary, time, mark, audio, video {  
+    margin: 0;  
+    padding: 0;  
+    border: 0;  
+    font-size: 100%;  
+    font: inherit;  
+    vertical-align: baseline; 
+ }
 body {
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	margin: 0;
@@ -57,6 +66,11 @@ body {
     font-size: 18px;
     margin: 0;
     line-height: 1;
+    }
+    .box-subtitle{
+      margin: 10px 0;
+    font-size: 14px;
+    color: #A9A9A9;
     }
   }
   .box-body{
@@ -137,10 +151,16 @@ body {
     border-color: #367fa9;
     color: #FFF;
 }
+.btn-secondary{
+  background-color: #e60000;
+    color: #FFF;
+    width: 100%;
+}
 .main {
 	flex: 70%;
 	background-color: #f1f1f1;
-	padding: 20px;
+  padding: 20px;
+  height: 100vh;
 }
 .fakeimg {
 	background-color: #aaa;
@@ -151,6 +171,71 @@ body {
 	padding: 20px;
 	text-align: center;
 	background: #ddd;
+}
+
+.pull-left{
+  float: left;
+}
+
+.search-data{
+  background: #fff;
+  position: relative;
+  margin-bottom: 15px;
+  .search-list{
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    padding: 20px 10px 10px;
+    border-bottom: 1px solid #f4f4;
+    .dept-options{
+      width: 100%;
+      padding: 0;
+      border: none;
+      margin-right: auto;
+      .airline-info {
+          width: 150px;
+          padding-right: 5px;
+        .arln-logo{
+          background-image: url("https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/AI.png?v=4");
+          width: 40px;
+          height: 40px;
+          display: block;
+          background-position: 50%;
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+      }
+      .airways-info-sect {
+          display: flex;
+          height: 40px;
+          justify-content: center;
+          flex-direction: column;
+          margin-left: 15px;
+          .price{
+            color: #e60000;
+            font-size: 20px;
+            font-weight: 600;
+          }
+          .flight-code{
+            color: #878787;
+            font-size: 11px;
+            margin-top: 5px;
+          }
+          .airways-name{
+            color: #000;
+            font-size: 16px;
+            width: 100%;
+            display: inline-block;
+          }
+      }
+      .airline-time-box{
+        width: 100px;
+        .booking-btn{
+          width: 100%;
+        }
+      }
+    }
+  }
 }
 @media screen and (max-width: 700px) {
 	.row {
