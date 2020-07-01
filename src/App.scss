@@ -145,6 +145,7 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    width: 100%;
 }
 .btn-primary{
   background-color: #3c8dbc;
@@ -154,7 +155,6 @@ body {
 .btn-secondary{
   background-color: #e60000;
     color: #FFF;
-    width: 100%;
 }
 .main {
 	flex: 70%;
@@ -193,7 +193,7 @@ body {
       border: none;
       margin-right: auto;
       .airline-info {
-          width: 150px;
+          width: 170px;
           padding-right: 5px;
         .arln-logo{
           background-image: url("https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/AI.png?v=4");
@@ -229,13 +229,16 @@ body {
           }
       }
       .airline-time-box{
-        width: 100px;
+        width: 120px;
         .booking-btn{
           width: 100%;
         }
       }
     }
   }
+}
+.react-datepicker-wrapper{
+  width: 100%;
 }
 @media screen and (max-width: 700px) {
 	.row {

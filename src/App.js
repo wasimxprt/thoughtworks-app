@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.scss';
+import SearchList from "./components/SearchList";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function App() {
+
+  const [startDate, setStartDate] = useState(new Date());
+  const [returnDate, setReturnDate] = useState(new Date().setDate(new Date().getDate() + 1));
+
+  const handleChangeStartDate = date => {
+    setStartDate(date)
+  };
+
+  const handleChangeEndDate = date => {
+    setReturnDate(date)
+  };
+
   return (
     <div className="container">
       <div className="header">
@@ -17,30 +32,36 @@ function App() {
             <form role="form">
               <div className="box-body">
                 <div className="form-group">
-                  <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter Origin City" />
+                  <input type="text" className="form-control" id="originCity" placeholder="Enter Origin City" />
                 </div>
                 <div className="form-group">
-                  <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Enter Destination City" />
+                  <input type="text" className="form-control" id="destinationCity" placeholder="Enter Destination City" />
                 </div>
                 <div className="form-group">
-                  <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Departure Date" />
+                  <DatePicker className="form-control" id="departureDate" placeholder="Departure Date"
+                    selected={startDate}
+                    onChange={handleChangeStartDate}
+                  />
                 </div>
                 <div className="form-group">
-                  <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Return Date" />
+                  <DatePicker className="form-control" id="departureDate" placeholder="Departure Date"
+                    selected={returnDate}
+                    onChange={handleChangeEndDate}
+                  />
                 </div>
                 <div class="form-group">
-                  <select class="form-control">
-                    <option>option 1</option>
-                    <option>option 2</option>
-                    <option>option 3</option>
-                    <option>option 4</option>
-                    <option>option 5</option>
+                  <select class="form-control" id="noOfPassengers">
+                    <option>Select Passengers</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
                   </select>
                 </div>
 
               </div>
               <div className="box-footer">
-                <button type="submit" className="btn btn-primary">Search</button>
+                <button type="button" name="searchBtn" id="searchBtn" className="btn btn-primary">Search</button>
               </div>
             </form>
           </div>
@@ -53,213 +74,9 @@ function App() {
               <p className="box-subtitle">10 fights found Wed, 30 October</p>
             </div>
             <div className="search-data">
-              <div className="search-list">
-                <div className="dept-options">
-                  <div className="dept-options-section clearfix">
-                    <div className="pull-left airline-info">
-                      <div className="pull-left">
-                        <span className="arln-logo"></span>
-                      </div>
-                      <div className="pull-left airways-info-sect">
-                        <p>
-                          <span className="airways-name">Air India</span>
-                        </p>
-                        <p className="flight-code">A1-101</p>
-                      </div>
-                    </div>
-                    <div className="pull-left airline-time-box">
-                      <div className="pull-left airways-info-sect">
-                          <p>
-                            <span className="airways-name">05:00</span>
-                          </p>
-                          <p className="flight-code">Pune</p>
-                        </div>
-                    </div>
-                    <div className="pull-left airline-time-box">
-                      <div className="pull-left airways-info-sect">
-                          <p>
-                            <span className="airways-name">07:00</span>
-                          </p>
-                          <p className="flight-code">Delhi</p>
-                        </div>
-                    </div>
-                    <div className="pull-left airline-time-box">
-                      <div className="pull-left airways-info-sect">
-                          <p>
-                            <span className="airways-name">02h 00m</span>
-                          </p>
-                          <p className="flight-code">Non Stop</p>
-                        </div>
-                    </div>
-                    <div className="pull-left airline-time-box">
-                      <div className="pull-left airways-info-sect">
-                          <h3 className="price">3,879</h3>
-                        </div>
-                    </div>
-                    <div className="pull-left airline-time-box">
-                      <div className="pull-left booking-btn">
-                      <button type="submit" className="btn btn-secondary">Book</button>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="search-list">
-                <div className="dept-options">
-                  <div className="dept-options-section clearfix">
-                    <div className="pull-left airline-info">
-                      <div className="pull-left">
-                        <span className="arln-logo"></span>
-                      </div>
-                      <div className="pull-left airways-info-sect">
-                        <p>
-                          <span className="airways-name">Air India</span>
-                        </p>
-                        <p className="flight-code">A1-101</p>
-                      </div>
-                    </div>
-                    <div className="pull-left airline-time-box">
-                      <div className="pull-left airways-info-sect">
-                          <p>
-                            <span className="airways-name">05:00</span>
-                          </p>
-                          <p className="flight-code">Pune</p>
-                        </div>
-                    </div>
-                    <div className="pull-left airline-time-box">
-                      <div className="pull-left airways-info-sect">
-                          <p>
-                            <span className="airways-name">07:00</span>
-                          </p>
-                          <p className="flight-code">Delhi</p>
-                        </div>
-                    </div>
-                    <div className="pull-left airline-time-box">
-                      <div className="pull-left airways-info-sect">
-                          <p>
-                            <span className="airways-name">02h 00m</span>
-                          </p>
-                          <p className="flight-code">Non Stop</p>
-                        </div>
-                    </div>
-                    <div className="pull-left airline-time-box">
-                      <div className="pull-left airways-info-sect">
-                          <h3 className="price">3,879</h3>
-                        </div>
-                    </div>
-                    <div className="pull-left airline-time-box">
-                      <div className="pull-left booking-btn">
-                      <button type="submit" className="btn btn-secondary">Book</button>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="search-list">
-                <div className="dept-options">
-                  <div className="dept-options-section clearfix">
-                    <div className="pull-left airline-info">
-                      <div className="pull-left">
-                        <span className="arln-logo"></span>
-                      </div>
-                      <div className="pull-left airways-info-sect">
-                        <p>
-                          <span className="airways-name">Air India</span>
-                        </p>
-                        <p className="flight-code">A1-101</p>
-                      </div>
-                    </div>
-                    <div className="pull-left airline-time-box">
-                      <div className="pull-left airways-info-sect">
-                          <p>
-                            <span className="airways-name">05:00</span>
-                          </p>
-                          <p className="flight-code">Pune</p>
-                        </div>
-                    </div>
-                    <div className="pull-left airline-time-box">
-                      <div className="pull-left airways-info-sect">
-                          <p>
-                            <span className="airways-name">07:00</span>
-                          </p>
-                          <p className="flight-code">Delhi</p>
-                        </div>
-                    </div>
-                    <div className="pull-left airline-time-box">
-                      <div className="pull-left airways-info-sect">
-                          <p>
-                            <span className="airways-name">02h 00m</span>
-                          </p>
-                          <p className="flight-code">Non Stop</p>
-                        </div>
-                    </div>
-                    <div className="pull-left airline-time-box">
-                      <div className="pull-left airways-info-sect">
-                          <h3 className="price">3,879</h3>
-                        </div>
-                    </div>
-                    <div className="pull-left airline-time-box">
-                      <div className="pull-left booking-btn">
-                      <button type="submit" className="btn btn-secondary">Book</button>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="search-list">
-                <div className="dept-options">
-                  <div className="dept-options-section clearfix">
-                    <div className="pull-left airline-info">
-                      <div className="pull-left">
-                        <span className="arln-logo"></span>
-                      </div>
-                      <div className="pull-left airways-info-sect">
-                        <p>
-                          <span className="airways-name">Air India</span>
-                        </p>
-                        <p className="flight-code">A1-101</p>
-                      </div>
-                    </div>
-                    <div className="pull-left airline-time-box">
-                      <div className="pull-left airways-info-sect">
-                          <p>
-                            <span className="airways-name">05:00</span>
-                          </p>
-                          <p className="flight-code">Pune</p>
-                        </div>
-                    </div>
-                    <div className="pull-left airline-time-box">
-                      <div className="pull-left airways-info-sect">
-                          <p>
-                            <span className="airways-name">07:00</span>
-                          </p>
-                          <p className="flight-code">Delhi</p>
-                        </div>
-                    </div>
-                    <div className="pull-left airline-time-box">
-                      <div className="pull-left airways-info-sect">
-                          <p>
-                            <span className="airways-name">02h 00m</span>
-                          </p>
-                          <p className="flight-code">Non Stop</p>
-                        </div>
-                    </div>
-                    <div className="pull-left airline-time-box">
-                      <div className="pull-left airways-info-sect">
-                          <h3 className="price">3,879</h3>
-                        </div>
-                    </div>
-                    <div className="pull-left airline-time-box">
-                      <div className="pull-left booking-btn">
-                      <button type="submit" className="btn btn-secondary">Book</button>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <SearchList />
+              <SearchList />
+              <SearchList />
             </div>
           </div>
         </div>
