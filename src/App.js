@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.scss';
-import SearchList from "./components/SearchList";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import SearchPanel from './components/SearchPanel';
 import NoDataComponent from './components/NoDataComponent';
+import Autocomplete from "react-autocomplete"
 
 function App() {
 
@@ -15,6 +15,26 @@ function App() {
   const [returnDate, setReturnDate] = useState(new Date().setDate(new Date().getDate() + 1));
   const [searchResult, setSearchResult] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isOneWay, setIsOneWay] = useState(true);
+
+  const cities = [
+    { id: 1, label: 'Pune (PNQ)' },
+    { id: 2, label: 'Mumbai (BOM)' },
+    { id: 3, label: 'Bengaluru (BLR)' },
+    { id: 4, label: 'Delhi (DEL)' }
+  ]
+
+  const menuStyle = {
+    boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
+    background: '#ffffff',
+    padding: '10px 5px',
+    fontSize: '14px',
+    position: 'fixed',
+    overflow: 'auto',
+    maxHeight: '50%',
+    height: 'auto',
+    zIndex: '10'
+  }
 
   const handleChangeStartDate = date => {
     setStartDate(date)
@@ -25,9 +45,7 @@ function App() {
   };
 
   const handleSearch = () => {
-
-    console.log("data ", originCity, destinationCity, startDate)
-
+    setIsLoading(true);
     fetch(
       `http://localhost:3000/data.json`,
       {
@@ -44,15 +62,10 @@ function App() {
             el.destination === destinationCity;
         });
         setSearchResult(searchResults);
-        console.log("searchResults ",searchResults)
         setIsLoading(false);
       })
       .catch(error => console.log(error));
   }
-
-  useEffect(() => {
-
-  }, []);
 
   return (
     <div className="container">
@@ -62,29 +75,99 @@ function App() {
       <div className="row">
         <div className="side">
           <div className="box">
-            <div className="box-header">
-              <h3 className="box-title">One Way</h3>
+
+            <div class="tab">
+              <button class={`tablinks ${isOneWay ? 'active' : ''}`} onClick={e => setIsOneWay(true)} >One Way</button>
+              <button class={`tablinks ${!isOneWay ? 'active' : ''}`} onClick={e => setIsOneWay(false)}>Return</button>
             </div>
-            <form role="form">
+
+
+
+            {/* <div className="box-header">
+              <h3 className="box-title">One Way</h3>
+            </div> */}
+            <form role="form" autocomplete="off">
               <div className="box-body">
                 <div className="form-group">
-                  <input type="text" autoComplete="none" className="form-control" id="originCity" name="originCity" onChange={e => setOriginCity(e.target.value)} placeholder="Enter Origin City" value={originCity} />
+
+                  <Autocomplete
+                    inputProps={{
+                      "class": "form-control",
+                      "placeholder": "Enter Origin City",
+                      "id": "originCity",
+                      "name": "originCity",
+                      "autoComplete": "off"
+                    }}
+                    wrapperStyle={{
+                      width: "100%"
+                    }}
+                    items={cities}
+                    menuStyle={menuStyle}
+                    shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
+                    getItemValue={item => item.label}
+                    renderItem={(item, highlighted) =>
+                      <div
+                        key={item.id}
+                        className="item-list"
+                        style={{ backgroundColor: highlighted ? '#4095bf' : 'transparent' }}
+                      >
+                        <span>{item.label}</span>
+                      </div>
+                    }
+                    value={originCity}
+                    onChange={e => setOriginCity(e.target.value)}
+                    onSelect={value => setOriginCity(value)}
+                    className="form-control"
+                  />
                 </div>
+
                 <div className="form-group">
-                  <input type="text" autoComplete="none" className="form-control" id="destinationCity" name="destinationCity" onChange={e => setDestinationCity(e.target.value)} placeholder="Enter Destination City" value={destinationCity} />
+
+
+                  <Autocomplete
+                    inputProps={{
+                      "class": "form-control",
+                      "placeholder": "Enter Destination City",
+                      "id": "destinationCity",
+                      "name": "destinationCity",
+                      "autoComplete": "off"
+                    }}
+                    wrapperStyle={{
+                      width: "100%"
+                    }}
+                    items={cities}
+                    menuStyle={menuStyle}
+                    shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
+                    getItemValue={item => item.label}
+                    renderItem={(item, highlighted) =>
+                      <div
+                        key={item.id}
+                        className="item-list"
+                        style={{ backgroundColor: highlighted ? '#4095bf' : 'transparent' }}
+                      >
+                        <span>{item.label}</span>
+                      </div>
+                    }
+                    value={destinationCity}
+                    onChange={e => setDestinationCity(e.target.value)}
+                    onSelect={value => setDestinationCity(value)}
+                    className="form-control"
+                  />
+
                 </div>
                 <div className="form-group">
                   <DatePicker className="form-control" id="departureDate" placeholder="Departure Date"
                     selected={startDate}
                     onChange={handleChangeStartDate}
+                    dateFormat="yyyy/MM/dd"
                   />
                 </div>
-                {/* <div className="form-group">
+                {!isOneWay &&  <div className="form-group">
                   <DatePicker className="form-control" id="departureDate" placeholder="Departure Date"
                     selected={returnDate}
                     onChange={handleChangeEndDate}
                   />
-                </div> */}
+                </div> }
                 <div className="form-group">
                   <select className="form-control" id="noOfPassengers">
                     <option>Select Passengers</option>
@@ -109,21 +192,8 @@ function App() {
             originCity={originCity}
             destinationCity={destinationCity}
             searchResult={searchResult}
-            startDate={startDate} /> : <NoDataComponent /> }
-          
+            startDate={startDate} /> : <NoDataComponent />}
 
-          {/* <div className="box">
-            <div className="box-header">
-              <h3 className="box-title">{originCity} to {destinationCity}</h3>
-              <p className="box-subtitle">10 fights found Wed, 30 October</p>
-            </div>
-            <div className="search-data">
-
-              {searchResult && searchResult.length > 0 ? searchResult.map((flight, index) => (
-                <SearchList key={index} flight={flight} />
-              )) : <div><h3>No Records FOund</h3></div>}
-            </div>
-          </div> */}
         </div>
       </div>
 

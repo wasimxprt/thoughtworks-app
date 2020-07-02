@@ -1,5 +1,3 @@
-/* Style the body */
-
 *,
 *::before,
 *::after{box-sizing:border-box;}
@@ -22,21 +20,8 @@ body {
   color: white;
   h1{
     margin: 0px;
+    font-size: 18px;
   }
-}
-.navbar {
-	display: flex;
-	background-color: #333;
-	a {
-		color: white;
-		padding: 14px 20px;
-		text-decoration: none;
-		text-align: center;
-		&:hover {
-			background-color: #ddd;
-			color: black;
-		}
-	}
 }
 .row {
 	display: flex;
@@ -74,6 +59,7 @@ body {
     }
   }
   .box-body{
+    border-top: 1px solid #f4f4f4;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 3px;
@@ -162,21 +148,14 @@ body {
   padding: 20px;
   height: 100vh;
 }
-.fakeimg {
-	background-color: #aaa;
-	width: 100%;
-	padding: 20px;
-}
 .footer {
 	padding: 20px;
 	text-align: center;
 	background: #ddd;
 }
-
 .pull-left{
   float: left;
 }
-
 .search-data{
   background: #fff;
   position: relative;
@@ -196,13 +175,21 @@ body {
           width: 170px;
           padding-right: 5px;
         .arln-logo{
-          background-image: url("https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/AI.png?v=4");
           width: 40px;
           height: 40px;
           display: block;
           background-position: 50%;
           background-size: contain;
           background-repeat: no-repeat;
+        }
+        .airln-logo-spicejet{
+          background-image: url("https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/SG.png?v=4");
+        }
+        .airln-logo-airindia{
+          background-image: url("https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/AI.png?v=4");
+        }
+        .airln-logo-common{
+          background-image: url("https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/6E.png?v=4");
         }
       }
       .airways-info-sect {
@@ -240,11 +227,39 @@ body {
 .react-datepicker-wrapper{
   width: 100%;
 }
+.item-list {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  height: 25px;
+  padding: 2px 6px;
+}
+
+.tab {
+	overflow: hidden;
+	background-color: #fff;
+	button {
+		background-color: inherit;
+		float: left;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		padding: 14px 16px;
+		transition: 0.3s;
+		font-size: 16px;
+		width: 50%;
+		text-align: left;
+		&:hover {
+			background-color: #3c8dbc;
+			color: #FFF;
+		}
+	}
+	button.active {
+		background-color: #3c8dbc;
+	}
+}
 @media screen and (max-width: 700px) {
 	.row {
-		flex-direction: column;
-	}
-	.navbar {
 		flex-direction: column;
 	}
 }

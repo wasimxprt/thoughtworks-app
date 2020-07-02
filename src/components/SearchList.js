@@ -4,7 +4,20 @@ import React, { useState } from 'react';
 function SearchList(props) {
 
     const { flight } = props;
+    let flightLogo = "airln-logo-common";
 
+    switch (flight.name) {
+        case "Air India":
+            flightLogo = "airln-logo-airindia"
+            break;
+
+        case "SpiceJet":
+            flightLogo = "airln-logo-spicejet"
+            break;
+
+        default:
+            break;
+    }
 
     return (
         <div>
@@ -13,7 +26,7 @@ function SearchList(props) {
                     <div className="dept-options-section clearfix">
                         <div className="pull-left airline-info">
                             <div className="pull-left">
-                                <span className="arln-logo"></span>
+                                <span className={`arln-logo ${flightLogo}`}></span>
                             </div>
                             <div className="pull-left airways-info-sect">
                                 <p>
@@ -48,7 +61,7 @@ function SearchList(props) {
                         </div>
                         <div className="pull-left airline-time-box">
                             <div className="pull-left airways-info-sect">
-                                <h3 className="price">{flight.price}</h3>
+                                <h3 className="price">&#8377; {flight.price}</h3>
                             </div>
                         </div>
                         <div className="pull-left airline-time-box">
