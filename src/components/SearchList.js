@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-
 function SearchList(props) {
 
     const { flight } = props;
